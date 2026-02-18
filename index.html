@@ -1,20 +1,33 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-adsense-account" content="ca-pub-8677444645242297">
-  <title>카메라 렌즈 개수 판독기</title>
+  <meta name="description" content="AI 기반 카메라 렌즈 개수 판독기 - 딥러닝 기술을 활용하여 스마트폰의 카메라 렌즈 개수를 정확하게 분석하고 정보를 제공합니다.">
+  <meta name="keywords" content="카메라 렌즈, AI 판독, 스마트폰 카메라, 인공지능, 렌즈 개수, 딥러닝">
+  <title>AI 카메라 렌즈 판독기 - 스마트한 카메라 분석 도구</title>
   <link href='/style.css' rel='stylesheet'>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8677444645242297" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 </head>
 <body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">LensAI</a>
+      <ul class="nav-menu">
+        <li><a href="#tool">도구 사용</a></li>
+        <li><a href="#about">정보</a></li>
+        <li><a href="#contact">문의하기</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <div class="container">
-    <header>
-      <h1>카메라 렌즈 판독기</h1>
-      <p>AI가 카메라 렌즈의 개수를 분석합니다.</p>
+    <header id="tool">
+      <h1>AI 카메라 렌즈 판독기</h1>
+      <p>최신 인공지능 기술이 당신의 기기 성능을 분석합니다.</p>
     </header>
 
     <div class="test-section">
@@ -28,11 +41,36 @@
       <div id="label-container"></div>
     </div>
 
+    <section id="about" class="info-section">
+      <h2>왜 AI 카메라 렌즈 판독기를 사용해야 하나요?</h2>
+      <p>스마트폰 기술이 발전함에 따라 카메라 렌즈의 개수와 기능은 복잡해지고 있습니다. 본 서비스는 구글의 Teachable Machine과 TensorFlow.js 기술을 기반으로 개발된 AI 모델을 사용하여, 사용자가 업로드한 이미지 속의 카메라 렌즈를 실시간으로 분석합니다.</p>
+      
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>정확한 AI 분석</h3>
+          <p>수천 장의 이미지를 학습한 딥러닝 모델이 높은 정확도로 렌즈를 식별합니다.</p>
+        </div>
+        <div class="feature-card">
+          <h3>개인정보 보호</h3>
+          <p>업로드된 이미지는 서버에 저장되지 않으며, 사용자의 브라우저 내에서 즉시 분석된 후 폐기됩니다.</p>
+        </div>
+        <div class="feature-card">
+          <h3>편리한 사용성</h3>
+          <p>별도의 설치 없이 웹 브라우저에서 바로 이미지 한 장으로 결과를 확인할 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="content-text">
+        <h3>스마트폰 카메라의 진화</h3>
+        <p>싱글 카메라에서 듀얼, 트리플, 쿼드 카메라로 이어지는 진화는 단순한 유행이 아닙니다. 광각, 망원, 매크로 렌즈 등 각 렌즈는 고유의 역할을 수행하며 더 나은 사진 품질을 제공합니다. 저희 LensAI는 이러한 하드웨어의 구성을 AI가 어떻게 인식하는지 보여줌으로써 기술에 대한 이해를 돕습니다.</p>
+      </div>
+    </section>
+
     <hr style="margin: 3rem 0; border: 0; border-top: 1px solid #eee;">
 
-    <div class="form-section">
-      <h1>제휴 문의</h1>
-      <p>제휴 관련 문의사항을 남겨주시면 검토 후 연락드리겠습니다.</p>
+    <div id="contact" class="form-section">
+      <h2>제휴 및 서비스 문의</h2>
+      <p>기술 제휴나 서비스 관련 궁금한 점이 있으시면 언제든 메시지를 남겨주세요.</p>
       
       <form action="https://formspree.io/f/xnjbznbl" method="POST">
         <div class="form-group">
@@ -65,6 +103,18 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-links">
+        <a href="/privacy.html">개인정보처리방침</a>
+        <a href="/terms.html">이용약관</a>
+        <a href="#about">회사소개</a>
+      </div>
+      <p class="copyright">&copy; 2026 LensAI Project. All rights reserved.</p>
+    </div>
+  </footer>
+
   <script type="text/javascript" src="/main.js"></script>
 </body>
 </html>
