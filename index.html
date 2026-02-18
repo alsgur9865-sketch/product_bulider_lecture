@@ -16,11 +16,14 @@
     </header>
 
     <div class="test-section">
-      <div id="webcam-container"></div>
-      <div id="label-container"></div>
-      <div class="controls">
-        <button type="button" id="start-btn" onclick="init()">카메라 시작하기</button>
+      <div class="upload-container">
+        <input type="file" id="image-upload" accept="image/*" onchange="handleImageUpload(event)" style="display: none;">
+        <button type="button" id="upload-btn" onclick="document.getElementById('image-upload').click()">이미지 업로드하여 판독하기</button>
       </div>
+      <div id="image-preview-container">
+        <img id="image-preview" src="#" alt="미리보기" style="display: none; max-width: 100%; border-radius: 12px; margin-top: 1.5rem;">
+      </div>
+      <div id="label-container"></div>
     </div>
 
     <hr style="margin: 3rem 0; border: 0; border-top: 1px solid #eee;">

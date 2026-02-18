@@ -1,61 +1,59 @@
-// Teachable Machine Model URL
 const URL = "https://teachablemachine.withgoogle.com/models/mva2ORdnp/";
 
-let model, webcam, labelContainer, maxPredictions;
+let model, labelContainer, maxPredictions;
 
-// Load the image model and setup the webcam
-async function init() {
-    const startBtn = document.getElementById('start-btn');
-    startBtn.disabled = true;
-    startBtn.innerText = "모델 로딩 중...";
-
+// Load the image model
+async function loadModel() {
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
 
-    try {
-        // load the model and metadata
-        model = await tmImage.load(modelURL, metadataURL);
-        maxPredictions = model.getTotalClasses();
+    // load the model and metadata
+    model = await tmImage.load(modelURL, metadataURL);
+    maxPredictions = model.getTotalClasses();
 
-        // Convenience function to setup a webcam
-        const flip = true; // whether to flip the webcam
-        webcam = new tmImage.Webcam(400, 400, flip); // width, height, flip
-        await webcam.setup(); // request access to the webcam
-        await webcam.play();
-        window.requestAnimationFrame(loop);
-
-        // append elements to the DOM
-        document.getElementById("webcam-container").appendChild(webcam.canvas);
-        labelContainer = document.getElementById("label-container");
-        for (let i = 0; i < maxPredictions; i++) { // and class labels
-            const div = document.createElement("div");
-            div.className = "prediction-item";
-            labelContainer.appendChild(div);
-        }
-        
-        startBtn.style.display = 'none';
-    } catch (e) {
-        console.error(e);
-        alert("카메라를 시작할 수 없습니다. 권한을 확인해주세요.");
-        startBtn.disabled = false;
-        startBtn.innerText = "카메라 시작하기";
+    labelContainer = document.getElementById("label-container");
+    labelContainer.innerHTML = ""; // Clear previous labels
+    for (let i = 0; i < maxPredictions; i++) {
+        const div = document.createElement("div");
+        div.className = "prediction-item";
+        labelContainer.appendChild(div);
     }
 }
 
-async function loop() {
-    webcam.update(); // update the webcam frame
-    await predict();
-    window.requestAnimationFrame(loop);
+async function handleImageUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const uploadBtn = document.getElementById('upload-btn');
+    uploadBtn.disabled = true;
+    uploadBtn.innerText = "분석 중...";
+
+    // Show preview
+    const reader = new FileReader();
+    reader.onload = async function(e) {
+        const img = document.getElementById('image-preview');
+        img.src = e.target.result;
+        img.style.display = 'block';
+
+        // Load model if not loaded
+        if (!model) {
+            await loadModel();
+        }
+
+        // Wait for image to load to predict
+        img.onload = async function() {
+            await predict(img);
+            uploadBtn.disabled = false;
+            uploadBtn.innerText = "이미지 업로드하여 판독하기";
+        };
+    };
+    reader.readAsDataURL(file);
 }
 
-// run the webcam image through the image model
-async function predict() {
-    // predict can take in an image, video or canvas html element
-    const prediction = await model.predict(webcam.canvas);
+// run the image through the image model
+async function predict(imageElement) {
+    const prediction = await model.predict(imageElement);
     for (let i = 0; i < maxPredictions; i++) {
-        const classPrediction =
-            prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(0) + "%";
-        
         const item = labelContainer.childNodes[i];
         item.innerHTML = `
             <div class="label-name">${prediction[i].className}</div>
@@ -65,7 +63,6 @@ async function predict() {
             <div class="label-value">${(prediction[i].probability * 100).toFixed(0)}%</div>
         `;
         
-        // Highlight the most likely prediction
         if (prediction[i].probability > 0.5) {
             item.classList.add('active');
         } else {
