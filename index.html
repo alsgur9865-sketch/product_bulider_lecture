@@ -3,45 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
+  <title>카메라 렌즈 개수 판독기</title>
   <link href='/style.css' rel='stylesheet'>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 </head>
 <body>
   <div class="container">
-    <h1>제휴 문의</h1>
-    <p>제휴 관련 문의사항을 남겨주시면 검토 후 연락드리겠습니다.</p>
-    
-    <form action="https://formspree.io/f/xnjbznbl" method="POST">
-      <div class="form-group">
-        <label for="name">성함 / 업체명</label>
-        <input type="text" id="name" name="name" required placeholder="이름 또는 업체명을 입력해주세요">
+    <header>
+      <h1>카메라 렌즈 판독기</h1>
+      <p>AI가 카메라 렌즈의 개수를 분석합니다.</p>
+    </header>
+
+    <div class="test-section">
+      <div id="webcam-container"></div>
+      <div id="label-container"></div>
+      <div class="controls">
+        <button type="button" id="start-btn" onclick="init()">카메라 시작하기</button>
       </div>
+    </div>
+
+    <hr style="margin: 3rem 0; border: 0; border-top: 1px solid #eee;">
+
+    <div class="form-section">
+      <h1>제휴 문의</h1>
+      <p>제휴 관련 문의사항을 남겨주시면 검토 후 연락드리겠습니다.</p>
       
-      <div class="form-group">
-        <label for="email">이메일 주소</label>
-        <input type="email" id="email" name="_replyto" required placeholder="example@email.com">
-      </div>
-      
-      <div class="form-group">
-        <label for="message">문의 내용</label>
-        <textarea id="message" name="message" rows="5" required placeholder="제휴 제안 내용을 상세히 입력해주세요"></textarea>
-      </div>
-      
-      <button type="submit">문의하기</button>
-    </form>
+      <form action="https://formspree.io/f/xnjbznbl" method="POST">
+        <div class="form-group">
+          <label for="name">성함 / 업체명</label>
+          <input type="text" id="name" name="name" required placeholder="이름 또는 업체명을 입력해주세요">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">이메일 주소</label>
+          <input type="email" id="email" name="_replyto" required placeholder="example@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="message">문의 내용</label>
+          <textarea id="message" name="message" rows="5" required placeholder="제휴 제안 내용을 상세히 입력해주세요"></textarea>
+        </div>
+        
+        <button type="submit">문의하기</button>
+      </form>
+    </div>
 
     <div id="disqus_thread" style="margin-top: 50px;"></div>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        /*
-        var disqus_config = function () {
-        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        };
-        */
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() {
         var d = document, s = d.createElement('script');
         s.src = 'https://productbuilder-gzoy0dszqm.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
@@ -50,6 +60,6 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
-  <script defer type="text/javascript" src="/main.js"></script>
+  <script type="text/javascript" src="/main.js"></script>
 </body>
 </html>
